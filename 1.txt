@@ -1,0 +1,58 @@
+  <log4net>
+	<!--<log4net, Console Appender>-->
+	<appender name="ConsoleAppender" type="log4net.Appender.ColoredConsoleAppender">
+      <layout type="log4net.Layout.PatternLayout">
+        <conversionPattern value="%date %level - %message%newline"/>
+      </layout>
+      <mapping>
+        <level value="WARN"/>
+        <foreColor value="Yellow, HighIntensity"/>
+      </mapping>
+      <mapping>
+        <level value="ERROR"/>
+        <foreColor value="Red, HighIntensity"/>
+      </mapping>
+      <mapping>
+        <level value="INFO"/>
+        <foreColor value="Green, HighIntensity"/>
+      </mapping>
+      <mapping>
+        <level value="DEBUG"/>
+        <foreColor value="Blue, HighIntensity"/>
+      </mapping>
+    </appender>
+
+	<!--<log4net, File Appender>-->  
+	<appender name="LogFileAppender" type="log4net.Appender.RollingFileAppender">
+      <file value="C:\Test\Logs\"/>
+      <datePattern value="'ThreatMetrix_LogFile_'dd.MM.yyyy'.log'"/>
+      <staticLogFileName value="false"/>
+      <appendToFile value="true"/>
+      <rollingStyle value="Composite"/>
+      <maxSizeRollBackups value="15"/>
+      <maximumFileSize value="10MB"/>
+      <lockingModel type="log4net.Appender.FileAppender+MinimalLock"/>
+      <layout type="log4net.Layout.PatternLayout">
+        <!-- Allan Note: the param name=, value= pair is just a long form for the line immediately below it  -->
+		<!-- Allan Note: since we now have 2 conversionPattern tag/value pair, the second one override the first one, so the first line is not executed.  -->
+		<!-- Allan Note: also, review Tim Corey's video, total: 1:37:00 hour, on log4net, there is a great summary of log4net in that video -->
+		
+		<!-- 
+		    Allan Lee Notes: https://stackify.com/log4net-guide-dotnet-logging/, pdf file available in Tim Corey video directory
+			Using the layout below, write the level (%p), current date time (%d), 
+		    thread # (%thread), the message (%m) and a new line (%n). 
+		    The -5 in the %-5p is to set the width of the field to 5 characters.
+		-->  
+		  
+		<param name="ConversionPattern" value="%-5p%d{yyyy-MM-dd hh:mm:ss} – %m%n"/>
+        <conversionPattern value="%newline%date %-5level %logger %&gt;&gt; %message"/>
+      </layout>
+    </appender>
+	  
+    <root>
+      <level value="ALL"/>
+      <appender-ref ref="ConsoleAppender"/>
+      <appender-ref ref="LogFileAppender"/>
+    </root>
+	  
+  </log4net>
