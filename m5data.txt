@@ -1,4 +1,0 @@
-QQQQ      m05_qqqq.txt                            
-SPY       m05_spy.txt                             
-CHCO      m05_chco.txt                            
-BUSE      m05_buse.txt                            
