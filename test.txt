@@ -1,0 +1,20 @@
+C#
+using Aspose.Slides;
+using System.IO;
+string outputPath = Path.Combine(Directory.GetCurrentDirectory(), "hello.pptx");
+using (var presentation = new Presentation())
+{
+    var slide = presentation.Slides[0];
+    // Add a title shape with "hello"
+    var title = slide.Shapes.AddAutoShape(ShapeType.Rectangle, 50, 50, 600, 100);
+    title.TextFrame.Text = "hello";
+    // Optional: make it look like a title
+    var paragraph = title.TextFrame.Paragraphs[0];
+    paragraph.ParagraphFormat.Alignment = TextAlignment.Center;
+    var portion = paragraph.Portions[0];
+    portion.PortionFormat.FontHeight = 32;
+    portion.PortionFormat.FillFormat.FillType = FillType.Solid;
+    portion.PortionFormat.FillFormat.SolidFillColor.Color = System.Drawing.Color.Black;
+    presentation.Save(outputPath, SaveFormat.Pptx);
+}
+System.Console.WriteLine($"Saved to {outputPath}");
