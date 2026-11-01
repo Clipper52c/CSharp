@@ -1,0 +1,8 @@
+SELECT WorkbookName, 
+       CHARINDEX('.', WorkbookName) as DotPos,
+       LEN(WorkbookName) as Len
+FROM [Test-reference].[pmap].[PerformanceOSeriesAndStdevs]
+WHERE CHARINDEX('.', WorkbookName) <= 4  -- 0 = no dot, 1-4 = dot too early
+   OR WorkbookName IS NULL 
+   OR WorkbookName = ''
+   OR WorkbookName NOT LIKE '%.%'
